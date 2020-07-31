@@ -9,7 +9,7 @@ def listDirFiles(path='.'):
 
 
 def listToFile(li, path='./'):
-    """Creates the file 'path/liste.md' from a given list in the path location"""
+    """Creates the file 'path/liste.md' from a given list and the path."""
     try:
     	remove(path + "liste.md")
     except(FileNotFoundError):
