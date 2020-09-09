@@ -4,13 +4,13 @@ from pathlib import Path
 
 
 def listDirFiles(pathDir='./'):
-    """Returns the list of files and folders in a directory."""
+    """Returns the list of a directory content."""
     listDir = listdir(pathDir)
     # print("list : ", listDir)
     return sorted(listDir, key=str.lower)  # Sorted alphabetically
 
 def listDirFilesRecursive(pathDir='./'):
-    """Returns a list of all files and folders in a directory recursively."""
+    """Returns a list of the content of a directory recursively."""
     listDir  = [path.join(dp, f) for dp, dn, filenames in walk(pathDir) for f in filenames]
     return sorted(listDir, key=str.lower)
     
@@ -30,7 +30,7 @@ def listToMd(li, name = "liste.md",  pathDir='./'):
 
 
 def listToDictDir(listDir, pathDir='./'):
-    """Returns a dictionary where the keys are files of folders and values are lists of files and directories in the folder."""
+    """Returns a dictionary where the keys arethe content of the directory and their values are None if the key is a file and if it is a directory, it's content."""
     dictDirR = dict()
     for elem in listDir:
         elemPath = pathDir + str(elem)
@@ -47,7 +47,7 @@ def listToDictDir(listDir, pathDir='./'):
     return dictDirR
 
 
-def dictRecToMd(dic, name='liste.md', pathDir='./'):
+def dictRecToMd(dic, name='list.md', pathDir='./'):
     """Creates the file 'pathDir/name' from a given dictionary and the pathDir."""
     # print("dictRecToMd :\n\n")
     try:
@@ -62,7 +62,7 @@ def dictRecToMd(dic, name='liste.md', pathDir='./'):
 
 
 def writeMd(dic, nbTabs=0):
-    """Returns the string in Markdown to write from a dictionary."""
+    """Returns a string in Markdown listing the content of a dictionary."""
     text = ""
     # print(f"writeMd:\ntype(dic): {type(dic)}\ndic: {dic}\n")
     # print(dic.keys())
@@ -78,12 +78,12 @@ def writeMd(dic, nbTabs=0):
 
 
 dictDir = listToDictDir(listDirFiles())
-# print(f"\nDictionaire :\n, {dictDir}\n")
+# print(f"\nDictionary :\n, {dictDir}\n")
 # print(f"\nKeys :\n, {dictDir.keys()}\n")
 # print(f"\nValues :\n, {dictDir.values()}\n")
 dictRecToMd(dictDir)
 
-
 # listToMd(listDirFiles())
 
-# diff /media/lilian/TOSHIBA\ EXT/Musique/liste.md liste.md -y --suppress-common-lines -w | less
+# Compare two lists :
+# diff /path/to/file.md file2.md -y --suppress-common-lines -w | less
